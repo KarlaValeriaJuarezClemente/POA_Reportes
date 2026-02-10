@@ -1,0 +1,189 @@
+/* ========================================================================
+   SECCIÓN 1: IMPORTACIÓN DE FUENTES (TIPOGRAFÍA)
+   Aquí traemos las fuentes desde Google.
+   - Cabin: Para Títulos (aspecto moderno/humanista)
+   - Roboto: Para Texto normal (lectura fácil)
+   ======================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Estas 3 líneas son obligatorias para que Tailwind funcione. No tocar. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* ========================================================================
+       SECCIÓN 2: PALETA DE COLORES (VARIABLES)
+       Aquí se define el "alma" visual de la app.
+       
+       IMPORTANTE: Los colores usan formato HSL (Matiz, Saturación, Luminosidad).
+       - Primer número (328): El color (328 es Guinda, 215 es Azul, 0 es Rojo).
+       - Segundo número (88%): Qué tan intenso es el color.
+       - Tercer número (19%): Qué tan oscuro/claro es (0% es negro, 100% blanco).
+       ======================================================================== */
+    
+    /* --- COLOR PRINCIPAL (TU GUINDA) --- */
+    /* Controla: Botones principales, bordes activos, textos destacados */
+    --primary: 328 88% 19%;           
+    /* Controla: El color del texto DENTRO de un botón primario (usualmente blanco) */
+    --primary-foreground: 0 0% 100%;  
+
+    /* --- COLOR SECUNDARIO --- */
+    /* Controla: Botones secundarios, fondos de items seleccionados */
+    /* NOTA: Actualmente está en AZUL (215). Si quieres que combine con el guinda, cambia 215 por 328 */
+    --secondary: 215 25% 92%;
+    --secondary-foreground: 215 70% 25%;
+
+    /* --- FONDO Y TEXTO GENERAL --- */
+    /* El color de fondo de toda la página web (casi blanco) */
+    --background: 220 20% 97%;      
+    /* El color del texto de los párrafos (gris muy oscuro, casi negro) */
+    --foreground: 220 30% 15%;      
+
+    /* --- TARJETAS (Cajas blancas) --- */
+    /* Fondo de las "Cards" o cuadros de información */
+    --card: 0 0% 100%;              
+    --card-foreground: 220 30% 15%; 
+
+    /* --- ESTADOS (Semáforo) --- */
+    /* Color para "Completado" o "Éxito" (Verde) */
+    --success: 145 65% 42%;         
+    --success-foreground: 0 0% 100%;
+    
+    /* Color para "Advertencia" o "Pendiente" (Amarillo/Naranja) */
+    --warning: 38 92% 50%;          
+    --warning-foreground: 38 100% 15%;
+    
+    /* Color para "Error", "Riesgo" o "Cancelar" (Rojo) */
+    --danger: 0 72% 51%;            
+    --danger-foreground: 0 0% 100%;
+    
+    /* Color para información neutral (Azul claro) */
+    --info: 200 85% 50%;            
+    --info-foreground: 0 0% 100%;
+
+    /* --- COLORES DE PRIORIDAD (Usados en etiquetas) --- */
+    --priority-critical: 0 72% 51%;  /* Rojo */
+    --priority-high: 25 95% 53%;     /* Naranja */
+    --priority-medium: 38 92% 50%;   /* Amarillo */
+    --priority-low: 145 65% 42%;     /* Verde */
+
+    /* --- ELEMENTOS DE INTERFAZ FINOS --- */
+    /* Color de textos deshabilitados o explicaciones pequeñas (Gris suave) */
+    --muted: 220 15% 94%;
+    --muted-foreground: 220 15% 45%;
+    
+    /* Color de acento para detalles decorativos */
+    --accent: 215 50% 88%;
+    --accent-foreground: 215 70% 25%;
+    
+    /* Color de fondo de los menús desplegables (Popups) */
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 30% 15%;
+    
+    /* Color de las líneas finas o bordes de cuadros */
+    --border: 220 15% 88%;
+    
+    /* Color del borde de los campos de texto (inputs) */
+    --input: 220 15% 88%;
+    
+    /* Color del anillo brillante cuando haces clic en un input (Debe ser igual al primario) */
+    --ring: 328 88% 19%;
+    
+    /* REDONDEZ DE LOS BOTONES */
+    /* Cambia esto para que los botones sean más cuadrados (0rem) o muy redondos (2rem) */
+    --radius: 0.75rem; 
+    
+    /* --- GRADIENTES (Efectos visuales) --- */
+    /* Se generan automáticamente usando tu color --primary. No necesitas tocar esto. */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(328 60% 35%) 100%);
+    --gradient-success: linear-gradient(135deg, hsl(var(--success)) 0%, hsl(160 60% 45%) 100%);
+
+    /* ========================================================================
+       SECCIÓN 3: SIDEBAR (MENÚ LATERAL)
+       Aquí controlas específicamente el menú de la izquierda.
+       ======================================================================== */
+    
+    /* Fondo del menú lateral (Lo pusimos Guinda igual que el primario) */
+    --sidebar-background: 328 88% 19%;
+    /* Color del texto del menú */
+    --sidebar-foreground: 0 0% 98%;
+    
+    /* Color del ítem cuando está activo/seleccionado (Blanco) */
+    --sidebar-primary: 0 0% 100%;
+    --sidebar-primary-foreground: 328 88% 19%;
+    
+    /* Color del ítem cuando pasas el mouse por encima (Hover) */
+    /* NOTA: Está en AZUL (215). Cámbialo a 328 si quieres que sea un guinda más claro */
+    --sidebar-accent: 35, 36%, 53%; 
+    --sidebar-accent-foreground: 0 0% 98%;
+    
+    --sidebar-border: 35, 36%, 53%;
+    --sidebar-ring: 0, 0%, 100%;
+  }
+
+  /* --- MODO OSCURO (Opcional) --- */
+  /* Si tu app activa el modo noche, usará estos colores en vez de los de arriba */
+  .dark {
+    --background: 220 25% 10%; /* Fondo casi negro */
+    --foreground: 220 10% 95%; /* Texto blanco */
+    --card: 220 25% 14%;       /* Tarjetas gris oscuro */
+    --card-foreground: 220 10% 95%;
+    --primary: 328 85% 55%;    /* El Guinda pero más brillante para que se vea en lo oscuro */
+    --primary-foreground: 220 25% 10%;
+    
+    /* Resto de variables oscuras... */
+    --muted: 220 25% 18%;
+    --muted-foreground: 220 15% 60%;
+    --border: 220 25% 22%;
+    --input: 220 25% 22%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  /* ========================================================================
+     SECCIÓN 4: APLICACIÓN DE FUENTES
+     Aquí asignamos las fuentes que importamos arriba a los elementos HTML.
+     ======================================================================== */
+  
+  /* CUERPO DE LA PÁGINA (Párrafos, botones, listas) */
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Roboto', sans-serif; /* Usamos Roboto aquí */
+  }
+
+  /* TÍTULOS (h1, h2, h3...) */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cabin', sans-serif; /* Usamos Cabin para que destaquen */
+  }
+}
+
+/* ========================================================================
+   SECCIÓN 5: UTILIDADES Y ANIMACIONES
+   Clases especiales para efectos visuales.
+   ======================================================================== */
+@layer utilities {
+  /* Efecto vidrio esmerilado */
+  .glass-effect {
+    @apply backdrop-blur-md bg-white/80 border border-white/20;
+  }
+  
+  /* Texto con gradiente (multicolor) basado en el color primario */
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-primary);
+  }
+
+  /* Animaciones simples */
+  .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
+  .animate-slide-up { animation: slideUp 0.5s ease-out forwards; }
+}
+
+/* Definición técnica de las animaciones (Keyframes) */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
