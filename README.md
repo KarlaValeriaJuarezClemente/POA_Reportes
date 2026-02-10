@@ -39,11 +39,18 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 4. Configurar y migrar base de datos
+### 4. Configurar y migrar base de datos (IMPORTANTE: en UNA MISMA terminal)
 ```bash
+$env:PYTHONPATH = "$pwd"
+
+# Navegar a la carpeta backend
 cd backend
+
+# Crear y aplicar migraciones
 python manage.py makemigrations
 python manage.py migrate
+
+# NOTA: No cierres esta terminal hasta terminar la configuración
 ```
 
 ### 5. Instalar dependencias del Frontend
@@ -58,15 +65,29 @@ npm install date-fns @radix-ui/react-icons react-router-dom @tanstack/react-quer
 ```
 
 ### 6. Para ejecutar el sistema
+Abre DOS terminales de PowerShell:
 
 #### Terminal 1 - Backend (Django)
-```bash
+```powershell
+# Navegar a la carpeta del proyecto (ajusta la ruta según donde lo hayas clonado)
+cd POA_Reportes
+
+# Configurar PYTHONPATH para esta sesión
+$env:PYTHONPATH = "$pwd"
+
+# Navegar a backend y ejecutar servidor
 cd backend
 python manage.py runserver
+
+# NO CIERRES ESTA TERMINAL mientras uses el sistema
 ```
 
 #### Terminal 2 - Frontend (React)
 ```bash
+# Navegar a la carpeta del proyecto
+cd POA_Reportes
+
+# Ejecutar servidor de desarrollo
 npm run dev
 ```
 
